@@ -2,46 +2,48 @@ var React = require('react');
 var Tweet = require('./Tweet.react.js');
 
 var listStyle = {
-	padding: '0'
+  padding: '0'
 };
 
 var listItemStyle = {
-	display: 'inline-block',
-	listStyle: 'none'
+  display: 'inline-block',
+  listStyle: 'none'
 };
 
 var TweetList = React.createClass({
-	getListofTweetIds: function() {
-		return Objecct.keys(this.props.tweets);
-	},
 
-	getTweetElement: function(tweetId) {
-		var tweet = this.props.tweets[tweetId];
-		var handleRemoveTweetFromCollection = this.props.onRemoveTweetFromCollection;
-		var tweetElement;
+  getListOfTweetIds: function () {
+    return Object.keys(this.props.tweets);
+  },
 
-		if (handleRemoveTweetFromCollection) {
-			tweetElement = (
-				<Tweet
-					tweet={tweet}
-					onImageClick={handleRemoveTweetFromCollection} />
-			);
-		} else {
-			tweetElement = <Tweet tweet={tweet} />;
-		}
+  getTweetElement: function (tweetId) {
+    var tweet = this.props.tweets[tweetId];
+    var handleRemoveTweetFromCollection = this.props.onRemoveTweetFromCollection;
+    var tweetElement;
+    
+    if (handleRemoveTweetFromCollection) {
+      
+      tweetElement = (
+        <Tweet
+          tweet={tweet}
+          onImageClick={handleRemoveTweetFromCollection} />
+      );
 
-		return <li style={listItemStyle} key={tweet.id}>{tweetElement}</li>;
-	},
+    } else {
+      tweetElement = <Tweet tweet={tweet} />;
+    }
 
-	render: function() {
-		var tweetElements = this.getListofTweetIds().map(this.getTweetElement);
+    return <li style={listItemStyle} key={tweet.id}>{tweetElement}</li>;
+  },
 
-		return (
-			<ul style-{listStyle}>
-				{tweetElements}
-			</ul>
-		);
-	}
+  render: function () {
+    var tweetElements = this.getListOfTweetIds().map(this.getTweetElement);
+
+    return (
+      <ul style={listStyle}>
+        {tweetElements}
+      </ul>
+    ); 
+  }
 });
-
 module.exports = TweetList;
